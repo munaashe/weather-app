@@ -5,6 +5,8 @@ export interface OMCurrentWeather {
     windspeed: number;
     winddirection: number;
     weathercode: number;
+    pressure: number;
+    precipitation: number;
     time: string;
 }
 
@@ -13,6 +15,8 @@ export interface OMForecastDay {
     temperature_2m_max: number;
     temperature_2m_min: number;
     weathercode: number;
+    pressure: number;
+    precipitation: number;
 }
 
 export interface OMForecastResponse {
@@ -21,6 +25,8 @@ export interface OMForecastResponse {
         temperature_2m_max: number[];
         temperature_2m_min: number[];
         weathercode: number[];
+        pressure: number[];
+        precipitation: number[];
     };
 }
 
@@ -30,6 +36,8 @@ export interface OMHistoryResponse {
         temperature_2m_max: number[];
         temperature_2m_min: number[];
         weathercode: number[];
+        pressure: number[];
+        precipitation: number[];
     };
 }
 

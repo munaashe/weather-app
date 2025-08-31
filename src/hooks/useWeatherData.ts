@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import type { OMCurrentResponse, OMForecastResponse, OMHistoryResponse } from '../utils/types';
 
 const BASE_URL = import.meta.env.VITE_WEATHER_API_URL;
-const GEOCODING_URL = import.meta.env.VITE_GEOCODING_API_URL || 'https://geocoding-api.open-meteo.com/v1/search';
+const GEOCODING_URL = import.meta.env.VITE_GEOCODING_API_URL;
 
 function useCurrentWeather(city: string) {
     const [data, setData] = useState<OMCurrentResponse | null>(null);
@@ -19,7 +19,7 @@ function useCurrentWeather(city: string) {
             .then(geo => {
                 if (geo && geo.results && geo.results.length > 0) {
                     const { latitude, longitude } = geo.results[0];
-                    return fetch(`${BASE_URL}?latitude=${latitude}&longitude=${longitude}&current_weather=true`)
+                    return fetch(`${BASE_URL}?latitude=${latitude}&longitude=${longitude}&current_weather=true&pressure=true&precipitation=true`)
                         .then(res => res.json());
                 } else {
                     throw new Error('City not found');
@@ -51,7 +51,7 @@ function useForecast(city: string, days: number = 3) {
             .then(geo => {
                 if (geo && geo.results && geo.results.length > 0) {
                     const { latitude, longitude } = geo.results[0];
-                    return fetch(`${BASE_URL}?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode&start_date=${startStr}&end_date=${endStr}`)
+                    return fetch(`${BASE_URL}?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_sum&start_date=${startStr}&end_date=${endStr}`)
                         .then(res => res.json());
                 } else {
                     throw new Error('City not found');
@@ -78,7 +78,7 @@ function useHistory(city: string, start: string, end: string) {
             .then(geo => {
                 if (geo && geo.results && geo.results.length > 0) {
                     const { latitude, longitude } = geo.results[0];
-                    return fetch(`${BASE_URL}?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode&start_date=${start}&end_date=${end}`)
+                    return fetch(`${BASE_URL}?latitude=${latitude}&longitude=${longitude}&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_sum&start_date=${start}&end_date=${end}`)
                         .then(res => res.json());
                 } else {
                     throw new Error('City not found');
