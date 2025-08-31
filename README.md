@@ -1,69 +1,58 @@
-# React + TypeScript + Vite
+# Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+This is a modern weather application built with React, TypeScript (TSX), and Tailwind CSS. It fetches weather data from the Open-Meteo API and provides users with current, historical, and forecast weather information in a beautiful, responsive UI.
 
-Currently, two official plugins are available:
+## Tech Stack & Justification
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **TypeScript (TSX):**
+  - Ensures type safety and reduces runtime errors.
+  - Improves code maintainability and developer experience.
+  - TSX allows for strongly-typed React components, making the codebase robust and scalable.
 
-## Expanding the ESLint configuration
+- **Tailwind CSS:**
+  - Utility-first CSS framework for rapid UI development.
+  - Enables consistent, responsive, and modern design with minimal custom CSS.
+  - Great for prototyping and production-ready styling.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Open-Meteo API:**
+  - Free, fast, and reliable weather data source.
+  - Provides endpoints for current, historical, and forecast weather.
+  - No API key required, making integration simple and accessible.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Features
+- Current weather, historical data, and multi-day forecast.
+- Loading and error states with skeleton UI.
+- Clickable days to view detailed weather.
+- Responsive and accessible design.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+2. **Run the app locally:**
+   ```bash
+   npm run dev
+   ```
+3. **Run tests (Vitest):**
+   ```bash
+   npm run test
+   ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Project Structure
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `src/App.tsx` — Main app logic and layout
+- `src/components/selected-day-weather.tsx` — Detailed weather for selected day
+- `src/components/historic-and-forecast.tsx` — Historic and forecast weather row
+- `src/hooks/useWeatherData.ts` — Data fetching hooks
+- `src/utils/types.ts` — TypeScript types
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## API Reference
+
+Uses [Open-Meteo API](https://open-meteo.com/) for weather data. No API key required.
+
+## License
+
+MIT
